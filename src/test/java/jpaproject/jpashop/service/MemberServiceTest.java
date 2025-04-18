@@ -31,4 +31,20 @@ class MemberServiceTest {
         assertEquals(member, memberRepository.findOne(saveId));
     }
 
+    @Test
+    public void validateDuplicateMember_test() throws Exception {
+        //given
+        Member member1 = new Member();
+        member1.setName("kim");
+
+        Member member2 = new Member();
+        member2.setName("kim");
+
+        //when
+        memberService.join(member1);
+
+        //then
+        assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+    }
+
 }
