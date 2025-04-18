@@ -35,4 +35,10 @@ public class OrderItem {
         item.removeStock(count);
         return orderItem;
     }
+
+    //비즈니스 로직
+    //주문 취소
+    public void cancel() {
+        getItem().addStock(count);
+    }
 }
