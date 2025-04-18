@@ -5,6 +5,8 @@ import jakarta.persistence.PersistenceContext;
 import jpaproject.jpashop.domain.Member;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberRepository {
 
@@ -17,6 +19,11 @@ public class MemberRepository {
 
     public Member findOne(Long id) {
         return em.find(Member.class, id);
+    }
+
+    public List<Member> findAll() {
+        return em.createQuery("select m from Member m", Member.class)
+                .getResultList();
     }
 
 }
