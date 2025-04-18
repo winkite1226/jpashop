@@ -62,6 +62,25 @@ class OrderServiceTest {
                 () -> orderService.order(member.getId(), item.getId(), orderCount));
     }
 
+    @Test
+    public void cancelOrder_test() {
+        //given
+        Member member = createMember();
+        Item item = createBook("learning JPA", 20000, 20);
+        int orderCount = 8;
+
+        Long orderId = orderService.order(member.getId(), item.getId(), orderCount);
+
+        //when
+        orderService.cancelOrder(orderId);
+
+        //then
+        Order getOrder = orderRepository.findOne(orderId);
+
+        assertEquals(OrderStatus.CANCEL, getOrder.getStatus());
+        assertEquals(20, item.getStockQuantity());
+    }
+
     private Member createMember() {
         Member member = new Member();
         member.setName("kim");
