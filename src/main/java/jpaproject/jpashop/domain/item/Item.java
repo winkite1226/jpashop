@@ -24,4 +24,10 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<Category>();
+
+    //비즈니스 로직
+    //재고 추가
+    public void addStock(int quantity) {
+        this.stockQuantity+=quantity;
+    }
 }
