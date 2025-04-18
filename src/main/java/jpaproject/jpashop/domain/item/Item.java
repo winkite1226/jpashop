@@ -2,6 +2,7 @@ package jpaproject.jpashop.domain.item;
 
 import jakarta.persistence.*;
 import jpaproject.jpashop.domain.Category;
+import jpaproject.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,5 +30,14 @@ public abstract class Item {
     //재고 추가
     public void addStock(int quantity) {
         this.stockQuantity+=quantity;
+    }
+
+    //재고 감소
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
     }
 }
