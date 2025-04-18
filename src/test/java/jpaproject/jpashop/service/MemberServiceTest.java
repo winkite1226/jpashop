@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -45,6 +47,24 @@ class MemberServiceTest {
 
         //then
         assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+    }
+
+    @Test
+    public void findMembers_test() throws Exception {
+        //given
+        Member member1 = new Member();
+        member1.setName("kim");
+
+        Member member2 = new Member();
+        member2.setName("lee");
+
+        //when
+        memberService.join(member1);
+        memberService.join(member2);
+        List<Member> members = memberService.findMembers();
+
+        //then
+        assertEquals(2, members.size());
     }
 
 }
