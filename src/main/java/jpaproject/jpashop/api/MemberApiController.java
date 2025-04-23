@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
@@ -56,5 +58,10 @@ public class MemberApiController {
     @Data
     public static class UpdateMemberRequest {
         private String name;
+    }
+
+    @GetMapping("/api/members")
+    public List<Member> members() {
+        return memberService.findMembers();
     }
 }
