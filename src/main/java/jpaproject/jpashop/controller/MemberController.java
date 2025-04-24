@@ -19,6 +19,12 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    @GetMapping(value="/members/login")
+    public String loginForm(Model model) {
+        model.addAttribute("loginForm", new loginForm());
+        return "members/loginForm";
+    }
+
     @GetMapping(value="/members/new")
     public String createForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
