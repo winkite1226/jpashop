@@ -39,6 +39,8 @@ public class MemberController {
 
         Address address = new Address(memberForm.getCity(), memberForm.getStreet(), memberForm.getZipcode());
         Member member = new Member();
+        member.setLoginId(member.getLoginId());
+        member.setPassword(member.getPassword());
         member.setName(memberForm.getName());
         member.setAddress(address);
 
